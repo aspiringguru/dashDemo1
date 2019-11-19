@@ -17,18 +17,12 @@ app.layout = html.Div([
         type='number',
         value=5
     ),
-    dcc.Input(
-        id='num2',
-        type='number',
-        value=3
-    ),
     html.Table([
         html.Tr([html.Td(['x', html.Sup(2)]), html.Td(id='square')]),
         html.Tr([html.Td(['x', html.Sup(3)]), html.Td(id='cube')]),
         html.Tr([html.Td([2, html.Sup('x')]), html.Td(id='twos')]),
         html.Tr([html.Td([3, html.Sup('x')]), html.Td(id='threes')]),
         html.Tr([html.Td(['x', html.Sup('x')]), html.Td(id='x^x')]),
-        html.Tr([html.Td(['y']), html.Td(id='y')]),
     ]),
 ])
 
@@ -38,14 +32,14 @@ app.layout = html.Div([
      Output('cube', 'children'),
      Output('twos', 'children'),
      Output('threes', 'children'),
-     Output('x^x', 'children'),
-     Output('y', 'children')],
-    [Input('num', 'value'),
-     Input('num2', 'value')])
-def callback_a(x, x2):
-    print("x=", x)
-    print("x2=", x2)
-    return x**2, x**3, 2**x, 3**x, x**x, x2
+     Output('x^x', 'children')],
+    [Input('num', 'value')])
+def callback_a(x):
+    if x is None:
+        print("x is None")
+        return 0, 0, 0, 0, 0
+    else:
+        return x**2, x**3, 2**x, 3**x, x**x
 
 
 if __name__ == '__main__':
